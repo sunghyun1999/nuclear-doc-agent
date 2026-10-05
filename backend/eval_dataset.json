@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What are the fundamental safety objectives for nuclear power plants?",
+    "expected_answer": "The fundamental safety objective is to protect people and the environment from harmful effects of ionizing radiation. This is achieved by establishing and maintaining effective defences against radiological hazards.",
+    "expected_pages": [3, 4, 5]
+  },
+  {
+    "question": "What is the defence in depth concept and how many levels does it have?",
+    "expected_answer": "Defence in depth is a concept where multiple levels of protection are provided. It consists of five levels: prevention of abnormal operation, control of abnormal operation, control of accidents within design basis, control of severe conditions, and emergency preparedness.",
+    "expected_pages": [16, 17, 18]
+  },
+  {
+    "question": "What are the requirements for reactor coolant system design?",
+    "expected_answer": "The reactor coolant system must be designed with adequate margin, using appropriate materials, with provisions for inspection and testing. Components must minimize risk of faults from inadequate materials, design standards, or manufacture quality.",
+    "expected_pages": [58, 59, 60]
+  },
+  {
+    "question": "What safety requirements exist for emergency core cooling systems?",
+    "expected_answer": "Emergency core cooling systems must be designed to provide adequate cooling to the reactor core for all postulated initiating events, with suitable redundancy, diversity, and independence to ensure reliability.",
+    "expected_pages": [59, 60, 61]
+  },
+  {
+    "question": "How should a nuclear power plant handle design extension conditions?",
+    "expected_answer": "Design extension conditions are postulated accident conditions not fully considered in the design basis. The plant must have features to prevent or mitigate these conditions, including prevention of large or early radioactive releases.",
+    "expected_pages": [8, 9, 22, 23]
+  },
+  {
+    "question": "What are the requirements for radiation protection in plant design?",
+    "expected_answer": "The design must ensure radiation doses to workers and the public are kept as low as reasonably achievable (ALARA). Shielding, ventilation, and access control must be provided.",
+    "expected_pages": [35, 36, 37]
+  },
+  {
+    "question": "What is required for the containment system of a nuclear power plant?",
+    "expected_answer": "The containment system must be designed to withstand design basis accidents, contain radioactive materials, and provide a barrier against release. It must maintain its integrity under various loading conditions.",
+    "expected_pages": [62, 63, 64]
+  },
+  {
+    "question": "What are the requirements for instrumentation and control systems?",
+    "expected_answer": "I&C systems must be designed to monitor plant parameters, provide automatic safety actions, and ensure reliable operation. Safety systems must be independent from other systems and protected against common cause failures.",
+    "expected_pages": [50, 51, 52]
+  },
+  {
+    "question": "How does the standard address seismic hazards for nuclear plants?",
+    "expected_answer": "Nuclear plants must be designed to withstand the effects of natural events including earthquakes. Seismic qualification of safety-related structures, systems and components is required based on site-specific hazard assessment.",
+    "expected_pages": [29, 30, 31]
+  },
+  {
+    "question": "What are the commissioning and operational requirements mentioned?",
+    "expected_answer": "The design must facilitate safe commissioning, operation, maintenance, and decommissioning. Provisions for testing, inspection, and maintenance of safety systems must be included in the design.",
+    "expected_pages": [38, 39, 40]
+  }
+]
