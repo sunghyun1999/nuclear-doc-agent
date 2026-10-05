@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import OntologyGraph from './OntologyGraph'
 
 const API = import.meta.env.DEV ? 'http://localhost:8000' : ''
 
@@ -60,7 +61,7 @@ export default function App() {
   const [totalChunks, setTotalChunks] = useState(0)
   const [strategy, setStrategy] = useState('fixed_size')
   const [useRerank, setUseRerank] = useState(true)
-  const [tab, setTab] = useState<'chat' | 'eval'>('chat')
+  const [tab, setTab] = useState<'chat' | 'eval' | 'ontology'>('chat')
   const [evalResult, setEvalResult] = useState<EvalResult | null>(null)
   const [chunkingResult, setChunkingResult] = useState<ChunkingComparison | null>(null)
   const [evaluating, setEvaluating] = useState(false)
@@ -180,6 +181,10 @@ export default function App() {
               style={{ ...s.tabBtn, ...(tab === 'eval' ? s.tabActive : {}) }}
               onClick={() => setTab('eval')}
             >Evaluation</button>
+            <button
+              style={{ ...s.tabBtn, ...(tab === 'ontology' ? s.tabActive : {}) }}
+              onClick={() => setTab('ontology')}
+            >Ontology</button>
           </div>
         </div>
       </header>
@@ -222,7 +227,9 @@ export default function App() {
 
         {/* Main content */}
         <div style={s.chatArea}>
-          {tab === 'chat' ? (
+          {tab === 'ontology' ? (
+            <OntologyGraph />
+          ) : tab === 'chat' ? (
             <>
               <div style={s.messages}>
                 {messages.length === 0 && (

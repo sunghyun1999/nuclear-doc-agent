@@ -195,6 +195,26 @@ def get_chunking_result():
     return {"status": _chunking_state["status"], "result": _chunking_state["result"]}
 
 
+_graph_cache: dict = {"data": None}
+
+
+@app.get("/requirements/graph")
+def get_requirements_graph():
+    """Return requirement cross-reference graph for ontology visualization."""
+    if _graph_cache["data"] is not None:
+        return _graph_cache["data"]
+
+    pdfs = list(UPLOAD_DIR.glob("*.pdf"))
+    if not pdfs:
+        raise HTTPException(status_code=400, detail="No documents uploaded.")
+
+    from ontology import build_graph
+
+    graph = build_graph(str(pdfs[0]))
+    _graph_cache["data"] = graph
+    return graph
+
+
 @app.delete("/documents")
 def clear_documents():
     collection = get_collection()
@@ -204,6 +224,7 @@ def clear_documents():
     for f in UPLOAD_DIR.iterdir():
         if f.is_file():
             os.remove(f)
+    _graph_cache["data"] = None
     return {"status": "cleared"}
 
 
