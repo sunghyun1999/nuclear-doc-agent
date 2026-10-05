@@ -20,31 +20,31 @@ Citation format: [Source: document_name, p.XX, Requirement/§ if applicable]
 
 Remember: In the nuclear domain, accuracy is paramount. It is always better to say "I don't have enough information" than to provide uncertain information."""
 
-GEMINI_URL = (
-    f"https://generativelanguage.googleapis.com/v1beta/"
-    f"models/{settings.gemini_model}:generateContent"
-)
-
-
 def _gemini_request(payload: dict, timeout: float = 60.0) -> dict:
     """Send request to Gemini API with retry logic."""
+    url = (
+        f"https://generativelanguage.googleapis.com/v1beta/"
+        f"models/{settings.gemini_model}:generateContent"
+    )
     headers = {
         "x-goog-api-key": settings.gemini_api_key,
         "Content-Type": "application/json",
     }
+    last_err = None
     for attempt in range(5):
         try:
             response = httpx.post(
-                GEMINI_URL, json=payload, headers=headers, timeout=timeout
+                url, json=payload, headers=headers, timeout=timeout
             )
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
+            last_err = e
             if e.response.status_code in (429, 503) and attempt < 4:
                 time.sleep(15 * (attempt + 1))
-            else:
-                raise
-    raise RuntimeError("Gemini API request failed after retries")
+                continue
+            raise
+    raise last_err or RuntimeError("Gemini API request failed after retries")
 
 
 def _compute_confidence(chunks: list[RetrievedChunk]) -> dict:
@@ -55,9 +55,9 @@ def _compute_confidence(chunks: list[RetrievedChunk]) -> dict:
     top_score = chunks[0].score if chunks else 0.0
     # Weighted: 60% top score + 40% average
     confidence = 0.6 * top_score + 0.4 * avg_score
-    if confidence >= 0.65:
+    if confidence >= 3.0:
         level = "high"
-    elif confidence >= 0.4:
+    elif confidence >= 1.0:
         level = "medium"
     else:
         level = "low"

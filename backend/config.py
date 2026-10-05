@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     chunk_overlap: int = 200
     top_k: int = 5
     embedding_model: str = "all-MiniLM-L6-v2"
-    gemini_model: str = "gemini-3.8-flash"
+    gemini_model: str = "gemini-3.1-flash-lite"
 
     model_config = {"env_file": ".env"}
 
